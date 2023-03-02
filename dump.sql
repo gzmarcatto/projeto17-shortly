@@ -27,7 +27,7 @@ SET default_table_access_method = heap;
 -- Name: sessions; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.sessions (
+CREATE TABLE sessions (
     id integer NOT NULL,
     "userId" integer NOT NULL,
     token text NOT NULL,
@@ -35,14 +35,14 @@ CREATE TABLE public.sessions (
 );
 
 
-ALTER TABLE public.sessions OWNER TO postgres;
+ALTER TABLE sessions OWNER TO postgres;
 
 --
 -- TOC entry 210 (class 1259 OID 24963)
 -- Name: urls; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.urls (
+CREATE TABLE urls (
     id integer NOT NULL,
     "shortUrl" text NOT NULL,
     url text NOT NULL,
@@ -52,14 +52,14 @@ CREATE TABLE public.urls (
 );
 
 
-ALTER TABLE public.urls OWNER TO postgres;
+ALTER TABLE urls OWNER TO postgres;
 
 --
 -- TOC entry 211 (class 1259 OID 24969)
 -- Name: users; Type: TABLE; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.users (
+CREATE TABLE users (
     id integer NOT NULL,
     name text NOT NULL,
     email text NOT NULL,
@@ -68,7 +68,7 @@ CREATE TABLE public.users (
 );
 
 
-ALTER TABLE public.users OWNER TO postgres;
+ALTER TABLE users OWNER TO postgres;
 
 --
 -- TOC entry 3358 (class 0 OID 24957)
@@ -76,7 +76,7 @@ ALTER TABLE public.users OWNER TO postgres;
 -- Data for Name: sessions; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.sessions (id, "userId", token, "createdAt") FROM stdin;
+COPY sessions (id, "userId", token, "createdAt") FROM stdin;
 \.
 
 
@@ -86,7 +86,7 @@ COPY public.sessions (id, "userId", token, "createdAt") FROM stdin;
 -- Data for Name: urls; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.urls (id, "shortUrl", url, "userId", "viewCount", "createdAt") FROM stdin;
+COPY urls (id, "shortUrl", url, "userId", "viewCount", "createdAt") FROM stdin;
 \.
 
 
@@ -96,7 +96,7 @@ COPY public.urls (id, "shortUrl", url, "userId", "viewCount", "createdAt") FROM 
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.users (id, name, email, password, "createdAt") FROM stdin;
+COPY users (id, name, email, password, "createdAt") FROM stdin;
 \.
 
 
