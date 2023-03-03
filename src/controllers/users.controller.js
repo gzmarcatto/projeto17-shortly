@@ -67,12 +67,12 @@ export async function getUserInfo(req, res) {
 export async function getRanking(req, res) {
   try {
     result = await db.query(`
-    SELECT USERS.NAME,
+    SELECT users.name,
     COUNT("shortUrl") AS "linksCount",
     SUM("viewCount") AS "viewCount"
-    FROM URLS
-    JOIN USERS ON URLS."userId" = USERS.ID
-    GROUP BY USERS.ID
+    FROM urls
+    JOIN users ON urls."userId" = users.id
+    GROUP BY users.id
     ORDER BY "viewCount" DESC
     LIMIT 10
     `);
