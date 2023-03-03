@@ -60,7 +60,7 @@ export async function openUrl(req, res) {
       viewCount + 1,
       shortUrl,
     ]);
-    return res.redirect(200, url);
+    return res.redirect(302, url);
   } catch (error) {
     return res.status(500).send(error.message);
   }
