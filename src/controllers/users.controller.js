@@ -66,8 +66,8 @@ export async function getUserInfo(req, res) {
 
 export async function getRanking(req, res) {
   try {
-    result = await db.query(`
-    SELECT users.name,
+    const result = await db.query(`
+    SELECT users.id, users.name,
     COUNT("shortUrl") AS "linksCount",
     SUM("viewCount") AS "viewCount"
     FROM urls
