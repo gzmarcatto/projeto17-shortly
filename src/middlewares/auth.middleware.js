@@ -1,7 +1,7 @@
 import { db } from "../database/database.connection.js";
 import Joi from "joi";
 
-async function authValidation(req, res, next) {
+export async function authValidation(req, res, next) {
   const { authorization: bearerToken } = req.headers;
 
   if (bearerToken === undefined) {
@@ -37,4 +37,3 @@ async function authValidation(req, res, next) {
   next();
 }
 
-export { authValidation };

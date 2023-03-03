@@ -1,4 +1,4 @@
-async function newurlValidation(req, res, next) {
+export async function newurlValidation(req, res, next) {
   const urlString = req.body.url;
 
   const validateUrl = (urlString) => {
@@ -20,5 +20,3 @@ async function newurlValidation(req, res, next) {
 
   next();
 }
-
-export { newurlValidation };
