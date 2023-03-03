@@ -35,7 +35,7 @@ SET default_table_access_method = heap;
 -- Name: sessions; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.sessions (
+CREATE TABLE sessions (
     id integer NOT NULL,
     "userId" integer NOT NULL,
     token text NOT NULL,
@@ -48,7 +48,7 @@ CREATE TABLE public.sessions (
 -- Name: sessions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE public.sessions_id_seq
+CREATE SEQUENCE sessions_id_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -63,7 +63,7 @@ CREATE SEQUENCE public.sessions_id_seq
 -- Name: sessions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE public.sessions_id_seq OWNED BY public.sessions.id;
+ALTER SEQUENCE sessions_id_seq OWNED BY sessions.id;
 
 
 --
@@ -71,7 +71,7 @@ ALTER SEQUENCE public.sessions_id_seq OWNED BY public.sessions.id;
 -- Name: urls; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.urls (
+CREATE TABLE urls (
     id integer NOT NULL,
     "shortUrl" text NOT NULL,
     url text NOT NULL,
@@ -86,7 +86,7 @@ CREATE TABLE public.urls (
 -- Name: urls_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE public.urls_id_seq
+CREATE SEQUENCE urls_id_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -101,7 +101,7 @@ CREATE SEQUENCE public.urls_id_seq
 -- Name: urls_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE public.urls_id_seq OWNED BY public.urls.id;
+ALTER SEQUENCE urls_id_seq OWNED BY urls.id;
 
 
 --
@@ -109,7 +109,7 @@ ALTER SEQUENCE public.urls_id_seq OWNED BY public.urls.id;
 -- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.users (
+CREATE TABLE users (
     id integer NOT NULL,
     name text NOT NULL,
     email text NOT NULL,
@@ -123,7 +123,7 @@ CREATE TABLE public.users (
 -- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE public.users_id_seq
+CREATE SEQUENCE users_id_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -138,7 +138,7 @@ CREATE SEQUENCE public.users_id_seq
 -- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
+ALTER SEQUENCE users_id_seq OWNED BY users.id;
 
 
 --
@@ -146,7 +146,7 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 -- Name: sessions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.sessions ALTER COLUMN id SET DEFAULT nextval('public.sessions_id_seq'::regclass);
+ALTER TABLE ONLY sessions ALTER COLUMN id SET DEFAULT nextval('sessions_id_seq'::regclass);
 
 
 --
@@ -154,7 +154,7 @@ ALTER TABLE ONLY public.sessions ALTER COLUMN id SET DEFAULT nextval('public.ses
 -- Name: urls id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.urls ALTER COLUMN id SET DEFAULT nextval('public.urls_id_seq'::regclass);
+ALTER TABLE ONLY urls ALTER COLUMN id SET DEFAULT nextval('urls_id_seq'::regclass);
 
 
 --
@@ -162,7 +162,7 @@ ALTER TABLE ONLY public.urls ALTER COLUMN id SET DEFAULT nextval('public.urls_id
 -- Name: users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
+ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
 --
@@ -171,7 +171,7 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 -- Data for Name: sessions; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.sessions (id, "userId", token, "createdAt") FROM stdin;
+COPY sessions (id, "userId", token, "createdAt") FROM stdin;
 8	2	34b1f0da-4ab8-4df4-9ac3-6fc6a97ec433	2022-10-12 20:14:28.093697
 9	1	0c9c0c51-25ff-407e-8c3b-cf419c4c11fd	2022-10-12 20:14:31.902035
 10	4	6e17ec3d-712b-46f5-aa8e-b24cc22e55da	2022-10-13 20:19:58.977181
@@ -187,7 +187,7 @@ COPY public.sessions (id, "userId", token, "createdAt") FROM stdin;
 -- Data for Name: urls; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.urls (id, "shortUrl", url, "userId", "viewCount", "createdAt") FROM stdin;
+COPY urls (id, "shortUrl", url, "userId", "viewCount", "createdAt") FROM stdin;
 4	5cc5be487b	https://www.tripadvisor.com/Restaurants-g303293-zfp10606-Fortaleza_State_of_Ceara.html	4	0	2022-10-13 20:22:53.504746
 5	91f859cb61	https://www.tripadvisor.com/Restaurants-g303293-zfp10606-Fortaleza_State_of_Ceara.html	4	0	2022-10-13 20:23:02.878598
 7	1b2e1e5df6	https://i.ytimg.com/vi/C6RUp21s6BQ/maxresdefault.jpg	4	3	2022-10-13 20:29:34.059771
@@ -206,7 +206,7 @@ COPY public.urls (id, "shortUrl", url, "userId", "viewCount", "createdAt") FROM 
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.users (id, name, email, password, "createdAt") FROM stdin;
+COPY users (id, name, email, password, "createdAt") FROM stdin;
 1	João	joao@driven.com.br	$2b$10$JI7Rf77yJe910YeVM8U9lOPsPsy6.RtARSG55Vb65yoUl4/ij9at2	2022-10-12 16:21:19.342909
 2	João	joa@driven.com.br	$2b$10$OJyfE2fwvnBxlNkTfb0FsuJC.FoPb9y6TSi4UtynR2.s8sqweG4ou	2022-10-12 20:07:33.427912
 3	Ana	ana@driven.com.br	$2b$10$X3TrSux8DQNPIzW1PyjXW.bCJLmWerBaPsv9/Ix5vzCXJYBuKU6mW	2022-10-13 20:19:35.803911
@@ -229,7 +229,7 @@ COPY public.users (id, name, email, password, "createdAt") FROM stdin;
 -- Name: sessions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.sessions_id_seq', 18, true);
+SELECT pg_catalog.setval('sessions_id_seq', 18, true);
 
 
 --
@@ -238,7 +238,7 @@ SELECT pg_catalog.setval('public.sessions_id_seq', 18, true);
 -- Name: urls_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.urls_id_seq', 12, true);
+SELECT pg_catalog.setval('urls_id_seq', 12, true);
 
 
 --
@@ -247,7 +247,7 @@ SELECT pg_catalog.setval('public.urls_id_seq', 12, true);
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 13, true);
+SELECT pg_catalog.setval('users_id_seq', 13, true);
 
 
 --
@@ -255,7 +255,7 @@ SELECT pg_catalog.setval('public.users_id_seq', 13, true);
 -- Name: sessions sessions_pk; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.sessions
+ALTER TABLE ONLY sessions
     ADD CONSTRAINT sessions_pk PRIMARY KEY (id);
 
 
@@ -264,7 +264,7 @@ ALTER TABLE ONLY public.sessions
 -- Name: sessions sessions_token_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.sessions
+ALTER TABLE ONLY sessions
     ADD CONSTRAINT sessions_token_key UNIQUE (token);
 
 
@@ -273,7 +273,7 @@ ALTER TABLE ONLY public.sessions
 -- Name: sessions sessions_userId_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.sessions
+ALTER TABLE ONLY sessions
     ADD CONSTRAINT "sessions_userId_key" UNIQUE ("userId");
 
 
@@ -282,7 +282,7 @@ ALTER TABLE ONLY public.sessions
 -- Name: urls urls_pk; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.urls
+ALTER TABLE ONLY urls
     ADD CONSTRAINT urls_pk PRIMARY KEY (id);
 
 
@@ -291,7 +291,7 @@ ALTER TABLE ONLY public.urls
 -- Name: urls urls_shortUrl_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.urls
+ALTER TABLE ONLY urls
     ADD CONSTRAINT "urls_shortUrl_key" UNIQUE ("shortUrl");
 
 
@@ -300,7 +300,7 @@ ALTER TABLE ONLY public.urls
 -- Name: users users_email_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.users
+ALTER TABLE ONLY users
     ADD CONSTRAINT users_email_key UNIQUE (email);
 
 
@@ -309,7 +309,7 @@ ALTER TABLE ONLY public.users
 -- Name: users users_pk; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.users
+ALTER TABLE ONLY users
     ADD CONSTRAINT users_pk PRIMARY KEY (id);
 
 
@@ -318,8 +318,8 @@ ALTER TABLE ONLY public.users
 -- Name: sessions sessions_fk0; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.sessions
-    ADD CONSTRAINT sessions_fk0 FOREIGN KEY ("userId") REFERENCES public.users(id);
+ALTER TABLE ONLY sessions
+    ADD CONSTRAINT sessions_fk0 FOREIGN KEY ("userId") REFERENCES users(id);
 
 
 --
@@ -327,8 +327,8 @@ ALTER TABLE ONLY public.sessions
 -- Name: urls urls_fk0; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.urls
-    ADD CONSTRAINT urls_fk0 FOREIGN KEY ("userId") REFERENCES public.users(id);
+ALTER TABLE ONLY urls
+    ADD CONSTRAINT urls_fk0 FOREIGN KEY ("userId") REFERENCES users(id);
 
 
 -- Completed on 2022-10-16 18:13:26 -03
