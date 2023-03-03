@@ -21,13 +21,14 @@ export async function getUserInfo(req, res) {
   try {
     const userId = res.locals.user.rows[0].id;
     const existsURL = await db.query(`SELECT * FROM urls WHERE "userId" = $1;`, [userId]);
-
+    
     if (existsURL.rows[0] !== undefined) {
-      await db.query(
+      const result = await db.query(
         `SELECT users.id AS "id", users.name AS "name", SUM("viewCount") as "visitCount", ARRAY(SELECT JSON_BUILD_OBJECT('id', urls.id, 'shortUrl', urls."shortUrl", 'url', urls.url, 'visitCount', urls."viewCount")
             FROM urls JOIN users ON urls."userId" = users.id WHERE "userId" = $1) AS "shortenedUrls" FROM urls JOIN users ON urls."userId" = users.id WHERE "userId" = $2 GROUP BY users.id;`,
         [userId, userId]
       );
+      console.log(result)
       return res.status(200).send(result.rows[0]);
     } else {
       const userInfo = await db.query(`SELECT * FROM users WHERE id = $1;`, [userId]);
