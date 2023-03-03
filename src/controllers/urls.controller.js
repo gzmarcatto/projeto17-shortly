@@ -32,10 +32,10 @@ export async function getUrl(req, res) {
     const existsId = await db.query(`SELECT * FROM urls WHERE id = $1;`, [id]);
 
     if (existsId.rows[0] === undefined) return res.status(404).send("URL not found.");
-
+    console.log(existsId.rows[0])
     const response = {
       id: existsId.rows[0].id,
-      shortURL: existsId.rows[0].shortURL,
+      shortUrl: existsId.rows[0].shortUrl,
       url: existsId.rows[0].url,
     };
     return res.status(200).send(response);
