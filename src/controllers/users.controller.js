@@ -24,8 +24,27 @@ export async function getUserInfo(req, res) {
 
     if (existsURL.rows[0] !== undefined) {
       const result = await db.query(
-        `SELECT users.id AS "id", users.name AS "name", SUM("viewCount") as "visitCount", ARRAY(SELECT JSON_BUILD_OBJECT('id', urls.id, 'shortUrl', urls."shortUrl", 'url', urls.url, 'visitCount', urls."viewCount")
-            FROM urls JOIN users ON urls."userId" = users.id WHERE "userId" = $1) AS "shortenedUrls" FROM urls JOIN users ON urls."userId" = users.id WHERE "userId" = $2 GROUP BY users.id;`,
+        `
+        SELECT USERS.ID AS "id",
+	              USERS.NAME AS "name",
+	              SUM("viewCount") AS "visitCount",
+	              ARRAY
+	              (SELECT JSON_BUILD_OBJECT('id',
+							                            URLS.ID,
+							                            'shortUrl',
+							                            URLS."shortUrl",
+							                            'url',
+							                            URLS.URL,
+							                            'visitCount',
+							                            URLS."viewCount")
+		                    FROM URLS
+		                    JOIN USERS ON URLS."userId" = USERS.ID
+		                    WHERE "userId" = $1) AS "shortenedUrls"
+        FROM URLS
+        JOIN USERS ON URLS."userId" = USERS.ID
+        WHERE "userId" = $2
+        GROUP BY USERS.ID;
+        `,
         [userId, userId]
       );
       console.log(result);
@@ -47,7 +66,7 @@ export async function getUserInfo(req, res) {
 
 export async function getRanking(req, res) {
   try {
-    await db.query(`
+    result = await db.query(`
     SELECT USERS.NAME,
     COUNT("shortUrl") AS "linksCount",
     SUM("viewCount") AS "viewCount"
@@ -57,7 +76,7 @@ export async function getRanking(req, res) {
     ORDER BY "viewCount" DESC
     LIMIT 10
     `);
-    return res.status(200).send(result.rows.slice(0, 10));
+    return res.status(200).send(result.rows);
   }catch (error) {
     return res.status(500).send(error.message);
   }
