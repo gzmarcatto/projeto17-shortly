@@ -10,27 +10,17 @@ export async function postUrl(req, res) {
     const getUser = await db.query(`SELECT "userId" FROM sessions WHERE token = $1;`, [
       token,
     ]);
-
     const userId = getUser.rows[0].userId;
 
     const nanoid = customAlphabet("1234567890abcdef", 10);
     let shortUrl = nanoid();
 
-    let existsURL = await db.query(`SELECT "shortUrl" FROM urls WHERE "shortUrl" = $1;`, [
-      shortUrl,
-    ]);
-
-    if (existsURL.rows[0]) {
-      shortUrl = nanoid();
-      existsURL = await db.query(`SELECT "shortUrl" FROM urls WHERE shortUrl = $1;`, [
-        shortUrl,
-      ]);
-    }
     await db.query(
       `INSERT INTO urls ("shortUrl", url, "userId", "viewCount") VALUES($1, $2, $3, $4);`,
       [shortUrl, url, userId, 0]
     );
-    return res.status(201).send({ shortUrl: shortUrl });
+    const id = await db.query(`SELECT id FROM urls WHERE "shortUrl" = $1`, [shortUrl])
+    return res.status(201).send({id: id.rows[0].id, shortUrl: shortUrl });
   } catch (error) {
     return res.status(500).send(error.message);
   }
